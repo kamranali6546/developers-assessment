@@ -18,6 +18,8 @@ import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
 import { Route as LayoutSettingsRouteImport } from './routes/_layout/settings'
 import { Route as LayoutItemsRouteImport } from './routes/_layout/items'
 import { Route as LayoutAdminRouteImport } from './routes/_layout/admin'
+import { Route as LayoutWorklogsIndexRouteImport } from './routes/_layout/worklogs/index'
+import { Route as LayoutWorklogsWorklogIdRouteImport } from './routes/_layout/worklogs/$worklogId'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -63,6 +65,16 @@ const LayoutAdminRoute = LayoutAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutWorklogsIndexRoute = LayoutWorklogsIndexRouteImport.update({
+  id: '/worklogs/',
+  path: '/worklogs/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutWorklogsWorklogIdRoute = LayoutWorklogsWorklogIdRouteImport.update({
+  id: '/worklogs/$worklogId',
+  path: '/worklogs/$worklogId',
+  getParentRoute: () => LayoutRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
@@ -73,6 +85,8 @@ export interface FileRoutesByFullPath {
   '/items': typeof LayoutItemsRoute
   '/settings': typeof LayoutSettingsRoute
   '/': typeof LayoutIndexRoute
+  '/worklogs/$worklogId': typeof LayoutWorklogsWorklogIdRoute
+  '/worklogs': typeof LayoutWorklogsIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
@@ -83,6 +97,8 @@ export interface FileRoutesByTo {
   '/items': typeof LayoutItemsRoute
   '/settings': typeof LayoutSettingsRoute
   '/': typeof LayoutIndexRoute
+  '/worklogs/$worklogId': typeof LayoutWorklogsWorklogIdRoute
+  '/worklogs': typeof LayoutWorklogsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,6 +111,8 @@ export interface FileRoutesById {
   '/_layout/items': typeof LayoutItemsRoute
   '/_layout/settings': typeof LayoutSettingsRoute
   '/_layout/': typeof LayoutIndexRoute
+  '/_layout/worklogs/$worklogId': typeof LayoutWorklogsWorklogIdRoute
+  '/_layout/worklogs/': typeof LayoutWorklogsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,6 +125,8 @@ export interface FileRouteTypes {
     | '/items'
     | '/settings'
     | '/'
+    | '/worklogs/$worklogId'
+    | '/worklogs'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
@@ -117,6 +137,8 @@ export interface FileRouteTypes {
     | '/items'
     | '/settings'
     | '/'
+    | '/worklogs/$worklogId'
+    | '/worklogs'
   id:
     | '__root__'
     | '/_layout'
@@ -128,6 +150,8 @@ export interface FileRouteTypes {
     | '/_layout/items'
     | '/_layout/settings'
     | '/_layout/'
+    | '/_layout/worklogs/$worklogId'
+    | '/_layout/worklogs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -203,6 +227,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAdminRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/worklogs/': {
+      id: '/_layout/worklogs/'
+      path: '/worklogs'
+      fullPath: '/worklogs'
+      preLoaderRoute: typeof LayoutWorklogsIndexRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/worklogs/$worklogId': {
+      id: '/_layout/worklogs/$worklogId'
+      path: '/worklogs/$worklogId'
+      fullPath: '/worklogs/$worklogId'
+      preLoaderRoute: typeof LayoutWorklogsWorklogIdRouteImport
+      parentRoute: typeof LayoutRoute
+    }
   }
 }
 
@@ -211,6 +249,8 @@ interface LayoutRouteChildren {
   LayoutItemsRoute: typeof LayoutItemsRoute
   LayoutSettingsRoute: typeof LayoutSettingsRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
+  LayoutWorklogsWorklogIdRoute: typeof LayoutWorklogsWorklogIdRoute
+  LayoutWorklogsIndexRoute: typeof LayoutWorklogsIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
@@ -218,6 +258,8 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutItemsRoute: LayoutItemsRoute,
   LayoutSettingsRoute: LayoutSettingsRoute,
   LayoutIndexRoute: LayoutIndexRoute,
+  LayoutWorklogsWorklogIdRoute: LayoutWorklogsWorklogIdRoute,
+  LayoutWorklogsIndexRoute: LayoutWorklogsIndexRoute,
 }
 
 const LayoutRouteWithChildren =
